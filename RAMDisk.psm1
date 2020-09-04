@@ -1,4 +1,6 @@
-﻿function Test-IMDiskInstalled {
+﻿Set-StrictMode -Version Latest
+
+function Test-IMDiskInstalled {
     $command = Get-Command "imdisk.exe"
     if ($command.CommandType -eq [Management.Automation.CommandTypes]::Application) {
         Write-Output $true
@@ -39,19 +41,23 @@ function New-RAMDisk {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory=$true,
+            Position=0,
             HelpMessage="The drive letter to which to mount the RAMDisk.")]
         [String]$DriveLetter,
 
         [Parameter(Mandatory=$true,
+            Position=1,
             HelpMessage="The size of the RAMDisk, suffixed with units: b (512-byte blocks), k, m, g, t, K, M, G, or T")]
         [String]$Size,
 
         [Parameter(Mandatory=$false,
+            Position=2,
             HelpMessage="The filesystem type to pass to the format command: ntfs, fat, fat32, ...")]
         [String]$FSType = "ntfs",
 
         [Parameter(Mandatory=$false,
-            HelpMessage="The label to use for the filesystem.  No spaces allowed.")]
+            Position=3,
+            HelpMessage="The label to use for the filesystem.")]
         [String]$FSLabel = "RAMDisk"
     )
     if (!(Test-IMDiskInstalled)) {

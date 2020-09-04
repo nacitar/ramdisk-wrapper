@@ -1,8 +1,16 @@
-﻿# So powershell can run this script: Set-ExecutionPolicy RemoteSigned
+﻿[CmdletBinding()]
+Param(
+    [Parameter(
+            Mandatory=$true,
+            Position=0,
+            HelpMessage="The drive letter of the RAMDisk to remove.")]
+    [ValidateNotNullOrEmpty()]
+    [String]
+    $DriveLetter
+)
 
 $ErrorActionPreference = [Management.Automation.ActionPreference]::Stop
 
 Import-Module -Global -Force "$PSScriptRoot\RAMDisk.psm1"
 
-$DriveLetter = "R"
 Remove-RAMDisk -DriveLetter $DriveLetter
