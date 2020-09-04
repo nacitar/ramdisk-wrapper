@@ -23,8 +23,7 @@ Param(
     [Parameter(Mandatory=$false,
         Position=4,
         HelpMessage="If specified, a Temp directory will be created within the RAMDisk.")]
-    [Switch]$MakeTempDirectory,
-
+    [Switch]$MakeTempDirectory
 )
 
 $ErrorActionPreference = [Management.Automation.ActionPreference]::Stop
